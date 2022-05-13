@@ -21,14 +21,3 @@ def add_shipping_to_order(order_id: str) -> tuple[bool, str]:
 
     order_store.update_order_shipping_label(order_id, shipping_id, label_url)
     return (True, "")
-
-
-
-
-
-
-
-
-
-
-

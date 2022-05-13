@@ -12,9 +12,8 @@ class OrderService(object):
 
     def add_shipping_to_order(self, order_id: str) -> tuple[bool, str]:
         order = self.order_store.get_order(order_id)
-        
-        shipment_success, shipping_info = self.dhl_client.create_shipment_request(
-            order)
+
+        shipment_success, shipping_info = self.dhl_client.create_shipment_request(order)
         if not shipment_success:
             return False, "Shipment"
 

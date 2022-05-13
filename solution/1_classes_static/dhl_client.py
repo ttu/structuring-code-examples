@@ -17,18 +17,17 @@ class DHLClient(object):
             f"https://wsbexpress.dhl.com/rest/gbl/shipment",
             data=payload,
             auth=requests.auth.HTTPBasicAuth(DHL_USERNAME, DHL_PASSWORD),
-            headers={"Content-Type": "application/json",
-                     "Accept": "application/json"},
+            headers={"Content-Type": "application/json", "Accept": "application/json"},
         )
 
         if dhl_response.status_code != 200:
-            return False, None
+            return (False, None)
 
         response_json = dhl_response.json()
 
         base64_pdf: str = response_json["ShipmentResponse"]["LabelImage"][0]["GraphicImage"]
         encoded_label = base64.decodebytes(base64_pdf.encode("ascii"))
-        return True, (response_json["ShipmentResponse"]["ShippingId"], encoded_label)
+        return (True, (response_json["ShipmentResponse"]["ShippingId"], encoded_label))
 
     def _parse_shipping_info(order):
         return {

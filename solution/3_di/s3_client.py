@@ -12,8 +12,7 @@ class S3Client(object):
             f"https://dev.aws.com/s3/{S3_STORAGE_BUCKET}",
             data=encoded_label,
             auth=requests.auth.HTTPBasicAuth(S3_USERNAME, S3_PASSWORD),
-            headers={"Content-Type": "application/octet-stream",
-                     "Accept": "application/json"},
+            headers={"Content-Type": "application/octet-stream", "Accept": "application/json"},
         )
 
         if s3_response.status_code != 200:

@@ -43,8 +43,7 @@ def add_shipping(order_id: str):
             f"https://wsbexpress.dhl.com/rest/gbl/shipment",
             data=request_json,
             auth=requests.auth.HTTPBasicAuth(username, password),
-            headers={"Content-Type": "application/json",
-                     "Accept": "application/json"},
+            headers={"Content-Type": "application/json", "Accept": "application/json"},
         )
 
         dhl_response.raise_for_status()
@@ -57,8 +56,7 @@ def add_shipping(order_id: str):
             f"https://dev.aws.com/s3/{s3_storage_bucket}",
             data=encoded_label,
             auth=requests.auth.HTTPBasicAuth(s3_username, s3_password),
-            headers={"Content-Type": "application/octet-stream",
-                     "Accept": "application/json"},
+            headers={"Content-Type": "application/octet-stream", "Accept": "application/json"},
         )
 
         s3_response.raise_for_status()

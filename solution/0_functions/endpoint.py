@@ -43,18 +43,17 @@ def create_shipment_request(order: Order):
         f"https://wsbexpress.dhl.com/rest/gbl/shipment",
         data=payload,
         auth=requests.auth.HTTPBasicAuth(DHL_USERNAME, DHL_PASSWORD),
-        headers={"Content-Type": "application/json",
-                 "Accept": "application/json"},
+        headers={"Content-Type": "application/json", "Accept": "application/json"},
     )
 
     if dhl_response.status_code != 200:
-        return False, None
+        return (False, None)
 
     response_json = dhl_response.json()
 
     base64_pdf: str = response_json["ShipmentResponse"]["LabelImage"][0]["GraphicImage"]
     encoded_label = base64.decodebytes(base64_pdf.encode("ascii"))
-    return True, (response_json["ShipmentResponse"]["ShippingId"], encoded_label)
+    return (True, (response_json["ShipmentResponse"]["ShippingId"], encoded_label))
 
 
 def parse_shipping_info(order: Order):
@@ -79,15 +78,14 @@ def send_label_to_s3(encoded_label: bytes):
         f"https://dev.aws.com/s3/{S3_STORAGE_BUCKET}",
         data=encoded_label,
         auth=requests.auth.HTTPBasicAuth(S3_USERNAME, S3_PASSWORD),
-        headers={"Content-Type": "application/octet-stream",
-                 "Accept": "application/json"},
+        headers={"Content-Type": "application/octet-stream", "Accept": "application/json"},
     )
 
     if s3_response.status_code != 200:
-        return False, "S3 error"
+        return (False, "S3 error")
 
     s3_response_json = s3_response.json()
-    return True, s3_response_json["Location"]
+    return (True, s3_response_json["Location"])
 
 
 def get_order(order_id: str) -> Order:

@@ -1,3 +1,6 @@
+from mocks import Order
+
+
 class OrderStore(object):
     def get_order(self, order_id: str):
         return Order.objects.filter(order_id=order_id).first()

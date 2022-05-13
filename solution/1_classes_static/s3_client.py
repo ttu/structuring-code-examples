@@ -1,3 +1,6 @@
+from mocks import requests
+
+
 S3_USERNAME = ""
 S3_PASSWORD = ""
 S3_STORAGE_BUCKET = ""

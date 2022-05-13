@@ -2,7 +2,7 @@ from order_service import OrderService
 
 order_service = OrderService()
 
-def post_edpoint(req: any):
+def post_endpoint(req: any):
     order_id = req["order_id"]
     result = order_service.add_shipping_to_order(order_id)
     
@@ -16,7 +16,8 @@ def post_edpoint(req: any):
     return 500, "Unknown error"
 
 def main():
-    print("Hello World!")
+    result = post_endpoint({"order_id": "123"})
+    print(result)
 
 if __name__ == "__main__":
     main()

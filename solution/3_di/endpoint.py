@@ -39,7 +39,7 @@ store = MockOrderStore()
 order_service = OrderService(MockOrderStore(), MockDHLClient(), MockS3Client())
 
 
-def post_edpoint(req: any):
+def post_endpoint(req: any):
     order_id = req["order_id"]
     result = order_service.add_shipping_to_order(order_id)
 
@@ -54,7 +54,7 @@ def post_edpoint(req: any):
 
 
 def main():
-    result = post_edpoint({"order_id": "123"})
+    result = post_endpoint({"order_id": "123"})
     print(result)
 
 

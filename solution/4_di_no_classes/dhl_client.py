@@ -26,16 +26,16 @@ class DHLClient(object):
 
     def _parse_shipping_info(order):
         return {
-            recipent: {
-                name: order.customer.name,
-                address: order.customer.address,
-                city: order.customer.city,
+            "recipent": {
+                "name": order.customer.name,
+                "address": order.customer.address,
+                "city": order.customer.city,
             },
-            sender: {
-                name: "ACME oy",
-                address: "Fishers road 1",
-                city: "Helsinki",
+            "sender": {
+                "name": "ACME oy",
+                "address": "Fishers road 1",
+                "city": "Helsinki",
             },
-            direction: "OUTBOUND",
-            reference: order_id,
+            "direction": "OUTBOUND",
+            "reference": order.order_id,
         }

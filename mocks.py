@@ -11,15 +11,16 @@ class HttpAuth:
 class Response:
     def __init__(self, url):
         self.url = url
+        self.status_code = 200
 
     def raise_for_status(self):
         pass
 
     def json(self):
         if 'dhl' in self.url:
-            return json.loads('{ "ShipmentResponse": { "LabelImage": [ {"GraphicImage": "0000" } ] } }')
+            return json.loads('{ "ShipmentResponse": { "ShippingId": "dummy_id", "LabelImage": [ {"GraphicImage": "0000" } ] } }')
         if 'aws' in self.url:
-            return json.loads('{ "Location": "http://some.url/images/dummy_id", "ShipmentResponse": { "ShippingId": "dummy_id" } }')
+            return json.loads('{ "Location": "http://some.url/images/dummy_id" }')
 
         raise Exception('Unknown url')
 
@@ -64,7 +65,7 @@ class Order:
     objects = Query()
     shipping_id = ''
     label_url = ''
-    customer= None
+    customer = None
 
     def __init__(self):
         pass

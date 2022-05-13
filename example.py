@@ -13,7 +13,9 @@ s3_password = ""
 s3_storage_bucket = ""
 
 
-def order_lable(order_id: str):
+def post_endpoint(req: any):
+    order_id = req["order_id"]
+
     try:
         order = Order.objects.filter(order_id=order_id).first()
 
@@ -62,9 +64,16 @@ def order_lable(order_id: str):
         order.shipping_id = response_json["ShipmentResponse"]["ShippingId"]
         order.label_url = s3_response_json["Location"]
         order.save()
+        return 200
     except Exception as e:
         print(e)
         raise e
 
 
-order_lable("123")
+def main():
+    result = post_endpoint({"order_id": "123"})
+    print(result)
+
+
+if __name__ == "__main__":
+    main()

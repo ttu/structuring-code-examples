@@ -1,7 +1,8 @@
 from dataclasses import dataclass
-from order_service import  create_order_service
-
-
+from order_service import create_order_service
+from order_store import OrderStore
+from dhl_client import DHLClient
+from s3_client import S3Client
 @dataclass
 class Order:
     id: str
@@ -29,9 +30,11 @@ def mock_send_label_to_s3(label_pdf: bytes):
     return True, "https://s3.amazonaws.com/mybucket/label.pdf"
 
 
-store = MockOrderStore()
-
-add_shipping_to_order = create_order_service(MockOrderStore(), mock_create_shipment_request, mock_send_label_to_s3)
+# add_shipping_to_order = create_order_service(MockOrderStore(), mock_create_shipment_request, mock_send_label_to_s3)
+add_shipping_to_order = create_order_service(
+    OrderStore(), 
+    lambda x: DHLClient().create_shipment_request(x), 
+    lambda x: S3Client().send_label_to_s3(x))
 
 
 def post_endpoint(req: any):

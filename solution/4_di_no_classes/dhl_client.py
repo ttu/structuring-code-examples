@@ -1,10 +1,15 @@
+import base64
+import json
+from mocks import Order, requests
+
+
 DHL_USERNAME = ""
 DHL_PASSWORD = ""
 
 
 class DHLClient(object):
 
-    def create_shipment_request(order: Order):
+    def create_shipment_request(self, order: Order):
         payload = json.dumps(DHLClient._parse_shipping_info(order))
 
         dhl_response = requests.post(

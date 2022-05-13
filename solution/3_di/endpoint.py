@@ -1,5 +1,8 @@
 from dataclasses import dataclass
 from order_service import OrderService
+from order_store import OrderStore
+from dhl_client import DHLClient
+from s3_client import S3Client
 
 # in this example we don't have reference to real ORM data model
 # so we need to create a model for it
@@ -34,9 +37,8 @@ class MockS3Client(object):
         return True, "https://s3.amazonaws.com/mybucket/label.pdf"
 
 
-store = MockOrderStore()
-
-order_service = OrderService(MockOrderStore(), MockDHLClient(), MockS3Client())
+# order_service = OrderService(MockOrderStore(), MockDHLClient(), MockS3Client())
+order_service = OrderService(OrderStore(), DHLClient(), S3Client())
 
 
 def post_endpoint(req: any):

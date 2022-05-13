@@ -7,7 +7,7 @@ S3_STORAGE_BUCKET = ""
 
 
 class S3Client(object):
-    def send_label_to_s3(encoded_label: bytes):
+    def send_label_to_s3(self, encoded_label: bytes):
         s3_response = requests.post(
             f"https://dev.aws.com/s3/{S3_STORAGE_BUCKET}",
             data=encoded_label,

@@ -1,8 +1,12 @@
 from dataclasses import dataclass
+from flask import Flask
+
 from order_service import create_order_service
 from order_store import OrderStore
 from dhl_client import DHLClient
 from s3_client import S3Client
+
+
 @dataclass
 class Order:
     id: str
@@ -23,8 +27,10 @@ class MockOrderStore:
         self.order.label_url = label_url
         return True
 
+
 def mock_create_shipment_request(order):
     return True, ("1", bytes())
+
 
 def mock_send_label_to_s3(label_pdf: bytes):
     return True, "https://s3.amazonaws.com/mybucket/label.pdf"
@@ -32,27 +38,30 @@ def mock_send_label_to_s3(label_pdf: bytes):
 
 # add_shipping_to_order = create_order_service(MockOrderStore(), mock_create_shipment_request, mock_send_label_to_s3)
 add_shipping_to_order = create_order_service(
-    OrderStore(), 
-    lambda x: DHLClient().create_shipment_request(x), 
+    OrderStore(),
+    lambda x: DHLClient().create_shipment_request(x),
     lambda x: S3Client().send_label_to_s3(x))
 
 
-def post_endpoint(req: any):
-    order_id = req["order_id"]
+app = Flask(__name__)
+
+
+@app.route('/orders/<order_id>/shipping', methods=['POST'])
+def add_shipping(order_id: str):
     result = add_shipping_to_order(order_id)
 
     if (result[0]):
-        return 200
+        return ("OK", 200)
 
     if result[1] == "Shipment":
-        return 400, "Could not create shipment"
+        return ("Could not create shipment", 400)
     if result[1] == "Label":
-        return 500, "Could not create label"
-    return 500, "Unknown error"
+        return ("Could not create label", 500)
+    return ("Unknown error", 500)
 
 
 def main():
-    result = post_endpoint({"order_id": "123"})
+    result = add_shipping("123")
     print(result)
 
 

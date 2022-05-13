@@ -36,3 +36,9 @@ curl -X POST 127.0.0.1:5000/orders/123/shipping
 2. Separated to classes
 3. Classes with Dependency injection
 4. DI without classes
+
+Run solutions, e.g. _solution/0_functions_/endpoint.py
+```sh
+export FLASK_APP=solution/0_functions/endpoint && flask run
+curl -X POST 127.0.0.1:5000/orders/123/shipping
+```

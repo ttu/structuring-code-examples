@@ -1,7 +1,7 @@
 
-
 import base64
 import json
+from flask import Flask
 
 from packages import Order, requests
 
@@ -12,26 +12,28 @@ S3_USERNAME = ""
 S3_PASSWORD = ""
 S3_STORAGE_BUCKET = ""
 
+app = Flask(__name__)
 
-def post_endpoint(req: any):
-    order_id = req["order_id"]
+
+@app.route('/orders/<order_id>/shipping', methods=['POST'])
+def add_shipping(order_id: str):
 
     order = get_order(order_id)
 
     shipment_success, shipping_info = create_shipment_request(order)
     if not shipment_success:
-        return 400, "Shipment error"
+        return ("Shipment error", 400)
 
     shipping_id = shipping_info[0]
     label_pdf = shipping_info[1]
 
     label_succes, label_url = send_label_to_s3(label_pdf)
     if not label_succes:
-        return 500, "Label error"
+        return ("Label error", 500)
 
     update_order_shipping_label(order_id, shipping_id, label_url)
 
-    return 200, ""
+    return ("OK", 200)
 
 
 def create_shipment_request(order: Order):
@@ -101,7 +103,7 @@ def update_order_shipping_label(order_id: str, shipping_id: str, label_url: str)
 
 
 def main():
-    result = post_endpoint({"order_id": "123"})
+    result = add_shipping("123")
     print(result)
 
 

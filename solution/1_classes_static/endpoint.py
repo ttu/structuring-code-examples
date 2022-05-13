@@ -1,25 +1,28 @@
+from flask import Flask
+
 from order_service import add_shipping_to_order
 
-# @POST("/orders/{order_id}/shipping")
+app = Flask(__name__)
 
 
-def post_endpoint(req: any):
-    order_id = req["order_id"]
+@app.route('/orders/<order_id>/shipping', methods=['POST'])
+def add_shipping(order_id: str):
     result = add_shipping_to_order(order_id)
 
     if (result[0]):
-        return 200
+        return ("OK", 200)
 
     if result[1] == "Shipment":
-        return 400, "Could not create shipment"
+        return ("Could not create shipment", 400)
     if result[1] == "Label":
-        return 500, "Could not create label"
-    return 500, "Unknown error"
+        return ("Could not create label", 500)
+    return ("Unknown error", 500)
 
 
 def main():
-    result = post_endpoint({"order_id": "123"})
+    result = add_shipping("123")
     print(result)
+
 
 if __name__ == "__main__":
     main()

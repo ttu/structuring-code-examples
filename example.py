@@ -1,5 +1,7 @@
 import base64
-import requests
+import json
+
+from mocks import Order, requests
 
 
 username = ""
@@ -17,18 +19,18 @@ def order_lable(order_id: str):
 
         request_json = json.dumps(
             {
-                recipent: {
-                    name: order.customer.name,
-                    address: order.customer.address,
-                    city: order.customer.city,
+                "recipent": {
+                    "name": order.customer.name,
+                    "address": order.customer.address,
+                    "city": order.customer.city,
                 },
-                sender: {
-                    name: "ACME oy",
-                    address: "Fishers road 1",
-                    city: "Helsinki",
+                "sender": {
+                    "name": "ACME oy",
+                    "address": "Fishers road 1",
+                    "city": "Helsinki",
                 },
-                direction: "OUTBOUND",
-                reference: order_id,
+                "direction": "OUTBOUND",
+                "reference": order_id,
             }
         )
 
@@ -57,7 +59,7 @@ def order_lable(order_id: str):
         s3_response.raise_for_status()
 
         s3_response_json = s3_response.json()
-        order.shipping_id = response_json["ShipmentResponse"]["ShippingId"]
+        order.shipping_id = s3_response_json["ShipmentResponse"]["ShippingId"]
         order.label_url = s3_response_json["Location"]
         order.save()
     except Exception as e:
@@ -75,3 +77,6 @@ class OrderStore(object):
         order.label_url = label_url
         order.save()
         return True
+
+
+order_lable("aaa")

@@ -1,4 +1,4 @@
-from mocks import requests
+from packages import requests
 
 
 S3_USERNAME = ""

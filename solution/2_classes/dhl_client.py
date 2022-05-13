@@ -1,7 +1,7 @@
 import base64
 import json
 
-from mocks import requests
+from packages import requests
 
 
 DHL_USERNAME = ""

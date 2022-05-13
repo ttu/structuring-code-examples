@@ -1,6 +1,9 @@
 
 
+import base64
 import json
+
+from mocks import Order, requests
 
 
 DHL_USERNAME = ""
@@ -51,18 +54,18 @@ def create_shipment_request(order: Order):
 
 def parse_shipping_info(order: Order):
     return {
-        recipent: {
-            name: order.customer.name,
-            address: order.customer.address,
-            city: order.customer.city,
+        "recipent": {
+            "name": order.customer.name,
+            "address": order.customer.address,
+            "city": order.customer.city,
         },
-        sender: {
-            name: "ACME oy",
-            address: "Fishers road 1",
-            city: "Helsinki",
+        "sender": {
+            "name": "ACME oy",
+            "address": "Fishers road 1",
+            "city": "Helsinki",
         },
-        direction: "OUTBOUND",
-        reference: order_id,
+        "direction": "OUTBOUND",
+        "reference": order.order_id,
     }
 
 
@@ -92,3 +95,6 @@ def update_order_shipping_label(order_id: str, shipping_id: str, label_url: str)
     order.label_url = label_url
     order.save()
     return True
+
+
+add_shipping_to_order("123")

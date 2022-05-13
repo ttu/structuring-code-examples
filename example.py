@@ -1,3 +1,4 @@
+from flask import Flask
 import base64
 import json
 
@@ -13,9 +14,12 @@ s3_password = ""
 s3_storage_bucket = ""
 
 
-def post_endpoint(req: any):
-    order_id = req["order_id"]
 
+app = Flask(__name__)
+
+
+@app.route('/orders/<order_id>/shipping', methods=['POST'])
+def add_shipping(order_id: str):
     try:
         order = Order.objects.filter(order_id=order_id).first()
 
@@ -64,14 +68,14 @@ def post_endpoint(req: any):
         order.shipping_id = response_json["ShipmentResponse"]["ShippingId"]
         order.label_url = s3_response_json["Location"]
         order.save()
-        return 200
+        return ("OK", 200)
     except Exception as e:
         print(e)
         raise e
 
 
 def main():
-    result = post_endpoint({"order_id": "123"})
+    result = add_shipping("123")
     print(result)
 
 

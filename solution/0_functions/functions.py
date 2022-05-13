@@ -13,22 +13,25 @@ S3_PASSWORD = ""
 S3_STORAGE_BUCKET = ""
 
 
-def add_shipping_to_order(order_id: str) -> tuple[bool, str]:
+def post_endpoint(req: any):
+    order_id = req["order_id"]
+
     order = get_order(order_id)
 
     shipment_success, shipping_info = create_shipment_request(order)
     if not shipment_success:
-        return False, "Shipment error"
+        return 400, "Shipment error"
 
     shipping_id = shipping_info[0]
     label_pdf = shipping_info[1]
 
     label_succes, label_url = send_label_to_s3(label_pdf)
     if not label_succes:
-        return False, "Label error"
+        return 500, "Label error"
 
     update_order_shipping_label(order_id, shipping_id, label_url)
-    return True, ""
+
+    return 200, ""
 
 
 def create_shipment_request(order: Order):
@@ -97,4 +100,10 @@ def update_order_shipping_label(order_id: str, shipping_id: str, label_url: str)
     return True
 
 
-add_shipping_to_order("123")
+def main():
+    result = post_endpoint({"order_id": "123"})
+    print(result)
+
+
+if __name__ == "__main__":
+    main()

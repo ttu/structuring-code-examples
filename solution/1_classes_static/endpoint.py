@@ -17,5 +17,9 @@ def post_endpoint(req: any):
     return 500, "Unknown error"
 
 
-result = post_endpoint({"order_id": "123"})
-print(result)
+def main():
+    result = post_endpoint({"order_id": "123"})
+    print(result)
+
+if __name__ == "__main__":
+    main()

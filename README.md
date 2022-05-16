@@ -12,7 +12,7 @@ It has a single function / endpoint which will:
 * Store received lable binary to S3
 * Update shipment id and label url to DB
 
-DB / ORM and HTTP requests are faked in these examples. Fake implementations are in _packages.py_.
+DB / ORM and HTTP requests are faked in these examples. Fake implementations are in [external_packages.py](solution/external_packages.py).
 
 ### Getting stared
 

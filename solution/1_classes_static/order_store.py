@@ -1,8 +1,9 @@
+from typing import Optional
 from packages import Order
 
 
 class OrderStore(object):
-    def get_order(self, order_id: str) -> Order:
+    def get_order(self, order_id: str) -> Optional[Order]:
         return Order.objects.filter(order_id=order_id).first()
 
     def update_order_shipping_label(self, order_id: str, shipping_id: str, label_url: str):

@@ -1,6 +1,7 @@
 
 import base64
 import json
+from typing import Optional
 from flask import Flask
 
 from packages import Order, requests
@@ -19,6 +20,8 @@ app = Flask(__name__)
 def add_shipping(order_id: str):
 
     order = get_order(order_id)
+    if not order:
+        return ("Order not found", 404)
 
     shipment_success, shipping_info = create_shipment_request(order)
     if not shipment_success:
@@ -88,7 +91,7 @@ def send_label_to_s3(encoded_label: bytes):
     return (True, s3_response_json["Location"])
 
 
-def get_order(order_id: str) -> Order:
+def get_order(order_id: str) -> Optional[Order]:
     return Order.objects.filter(order_id=order_id).first()
 
 

@@ -18,7 +18,8 @@ class Response:
 
     def json(self):
         if 'dhl' in self.url:
-            return json.loads('{ "ShipmentResponse": { "ShippingId": "dummy_id", "LabelImage": [ {"GraphicImage": "0000" } ] } }')
+            return json.loads(
+                '{ "ShipmentResponse": { "ShippingId": "dummy_id", "LabelImage": [ {"GraphicImage": "0000" } ] } }')
         if 'aws' in self.url:
             return json.loads('{ "Location": "http://some.url/images/dummy_id" }')
 
@@ -49,6 +50,9 @@ class QueryResponse:
         self.order_id = order_id
 
     def first(self):
+        if self.order_id is None:
+            return None
+
         customer = Customer('test', 'street 10', 'Helsinki')
         order = Order()
         order.order_id = self.order_id

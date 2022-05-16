@@ -7,6 +7,8 @@ order_store = OrderStore()
 
 def add_shipping_to_order(order_id: str) -> tuple[bool, str]:
     order = order_store.get_order(order_id)
+    if not order:
+        return (False, "Order")
 
     shipment_success, shipping_info = DHLClient.create_shipment_request(order)
     if not shipment_success:

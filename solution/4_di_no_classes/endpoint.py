@@ -8,7 +8,7 @@ from s3_client import S3Client
 
 
 @dataclass
-class Order:
+class MockOrder:
     id: str
     shipping_id: str
     label_url: str
@@ -16,7 +16,7 @@ class Order:
 
 class MockOrderStore:
     def __init__(self):
-        self.order = Order("", "", "")
+        self.order = MockOrder("", "", "")
 
     def get_order(self, order_id: str):
         self.order.id = order_id
@@ -53,6 +53,8 @@ def add_shipping(order_id: str):
     if (result[0]):
         return ("OK", 200)
 
+    if result[1] == "Order":
+        return ("Order not found", 404)
     if result[1] == "Shipment":
         return ("Could not create shipment", 400)
     if result[1] == "Label":

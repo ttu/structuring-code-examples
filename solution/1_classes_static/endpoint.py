@@ -12,6 +12,8 @@ def add_shipping(order_id: str):
     if (result[0]):
         return ("OK", 200)
 
+    if result[1] == "Order":
+        return ("Order not found", 404)
     if result[1] == "Shipment":
         return ("Could not create shipment", 400)
     if result[1] == "Label":

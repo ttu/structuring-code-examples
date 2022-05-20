@@ -1,5 +1,5 @@
 
-def create_order_service(order_store, create_shipment_request, send_label_to_s3):
+def create_order_service(order_store, create_shipment_request, store_label):
 
     def add_shipping_to_order(order_id: str) -> tuple[bool, str]:
         order = order_store.get_order(order_id)
@@ -13,7 +13,7 @@ def create_order_service(order_store, create_shipment_request, send_label_to_s3)
         shipping_id = shipping_info[0]
         label_pdf = shipping_info[1]
 
-        label_succes, label_url = send_label_to_s3(label_pdf)
+        label_succes, label_url = store_label(label_pdf)
         if not label_succes:
             return (False, "Label")
 

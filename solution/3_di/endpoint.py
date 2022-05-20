@@ -1,3 +1,4 @@
+import abc
 from dataclasses import dataclass
 from flask import Flask
 
@@ -34,11 +35,11 @@ class MockDHLClient(object):
 
 
 class MockS3Client(object):
-    def send_label_to_s3(self, label_pdf: bytes):
+    def store_label(self, label_pdf: bytes):
         return True, "https://s3.amazonaws.com/mybucket/label.pdf"
 
 
-# order_service = OrderService(MockOrderStore(), MockDHLClient(), MockS3Client())
+# order_service = OrderService(MockOrderStore(), MockDHLClient(), store_label())
 order_service = OrderService(OrderStore(), DHLClient(), S3Client())
 
 

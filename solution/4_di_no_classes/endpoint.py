@@ -32,15 +32,15 @@ def mock_create_shipment_request(order):
     return True, ("1", bytes())
 
 
-def mock_send_label_to_s3(label_pdf: bytes):
+def mock_store_label(label_pdf: bytes):
     return True, "https://s3.amazonaws.com/mybucket/label.pdf"
 
 
-# add_shipping_to_order = create_order_service(MockOrderStore(), mock_create_shipment_request, mock_send_label_to_s3)
+# add_shipping_to_order = create_order_service(MockOrderStore(), mock_create_shipment_request, mock_store_label)
 add_shipping_to_order = create_order_service(
     OrderStore(),
     lambda x: DHLClient().create_shipment_request(x),
-    lambda x: S3Client().send_label_to_s3(x))
+    lambda x: S3Client().store_label(x))
 
 
 app = Flask(__name__)

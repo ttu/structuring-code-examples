@@ -22,7 +22,7 @@ class OrderService(object):
         shipping_id = shipping_info[0]
         label_pdf = shipping_info[1]
 
-        label_succes, label_url = self.s3_client.send_label_to_s3(label_pdf)
+        label_succes, label_url = self.s3_client.store_label(label_pdf)
         if not label_succes:
             return (False, "Label")
 

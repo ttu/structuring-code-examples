@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from flask import Flask
 
 from order_service import create_order_service
@@ -7,43 +6,13 @@ from dhl_client import DHLClient
 from s3_client import S3Client
 
 
-@dataclass
-class MockOrder:
-    id: str
-    shipping_id: str
-    label_url: str
+app = Flask(__name__)
 
 
-class MockOrderStore:
-    def __init__(self):
-        self.order = MockOrder("", "", "")
-
-    def get_order(self, order_id: str):
-        self.order.id = order_id
-        return self.order
-
-    def update_order_shipping_label(self, order_id: str, shipping_id: str, label_url: str):
-        self.order.shipping_id = shipping_id
-        self.order.label_url = label_url
-        return True
-
-
-def mock_create_shipment_request(order):
-    return True, ("1", bytes())
-
-
-def mock_store_label(label_pdf: bytes):
-    return True, "https://s3.amazonaws.com/mybucket/label.pdf"
-
-
-# add_shipping_to_order = create_order_service(MockOrderStore(), mock_create_shipment_request, mock_store_label)
 add_shipping_to_order = create_order_service(
     OrderStore(),
     lambda x: DHLClient().create_shipment_request(x),
     lambda x: S3Client().store_label(x))
-
-
-app = Flask(__name__)
 
 
 @app.route('/orders/<order_id>/shipping', methods=['POST'])

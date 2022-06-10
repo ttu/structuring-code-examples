@@ -37,8 +37,30 @@ curl -X POST 127.0.0.1:5000/orders/123/shipping
 3. Classes with Dependency injection
 4. DI without classes
 
-Run solutions, e.g. _solution/0_functions_/endpoint.py
+Run solutions, e.g. _solution/0_functions_/api.py
 ```sh
-export FLASK_APP=solution/0_functions/endpoint && flask run
+export FLASK_APP=solution/0_functions/api && flask run
 curl -X POST 127.0.0.1:5000/orders/123/shipping
 ```
+
+Run tests, e.g. _solution/4_di_no_classes/tests.py_ (requires pytest)
+```sh
+pytest solution/4_di_no_classes/tests.py
+```
+
+## 0. Separated to functions
+For readability, move functionality to separate functions.
+
+## 1. Separated to classes and modules
+For readability, move functions to separate classes and modules. Classes are stateless (static), so from functional perspective they are just modules.
+
+## 2. Separated to classes
+Move functionality to classes. Service has high coupling, as it creates all instances, so not real benefit over previous solution.
+
+## 3. Classes with Dependency injection
+Inject dependencies into service.
+
+No need to use base classes as Python supports duck typing. Makes code more understandable, if we use base classes and reduces errors.
+
+## 4. DI without classes
+Example how to use DI without classes. Understandability is reduced, but it is possible to use DI without classes.

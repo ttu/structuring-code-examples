@@ -54,6 +54,8 @@ python -m pip install pytest
 pytest solution/4_di_no_classes/test_order_service.py
 ```
 
+NOTE: To execute tests with VS Code, open each solution directory separately in VS Code.
+
 ## 0. Separated to functions
 For readability, move functionality to separate functions.
 

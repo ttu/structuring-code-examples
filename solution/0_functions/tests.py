@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 # Note: will fail
 # ModuleNotFoundError: No module named 'flask'
-from endpoint import add_shipping
+from api import add_shipping
 
 
 @patch('endpoint.create_shipment_request', lambda x: (False, "Mocked failure"))

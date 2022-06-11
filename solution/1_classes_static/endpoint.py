@@ -19,12 +19,3 @@ def add_shipping(order_id: str):
     if result[1] == "Label":
         return ("Could not create label", 500)
     return ("Unknown error", 500)
-
-
-def main():
-    result = add_shipping("123")
-    print(result)
-
-
-if __name__ == "__main__":
-    main()

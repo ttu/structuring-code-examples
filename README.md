@@ -43,9 +43,14 @@ export FLASK_APP=solution/0_functions/api && flask run
 curl -X POST 127.0.0.1:5000/orders/123/shipping
 ```
 
+Run command, e.g. _solution/4_di_no_classes/command.py_
+```sh
+python solution/4_di_no_classes/command.py
+```
+
 Run tests, e.g. _solution/4_di_no_classes/test_order_service.py_
 ```sh
-python -m pip install flask
+python -m pip install pytest
 pytest solution/4_di_no_classes/test_order_service.py
 ```
 

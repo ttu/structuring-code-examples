@@ -43,9 +43,10 @@ export FLASK_APP=solution/0_functions/api && flask run
 curl -X POST 127.0.0.1:5000/orders/123/shipping
 ```
 
-Run tests, e.g. _solution/4_di_no_classes/tests.py_ (requires pytest)
+Run tests, e.g. _solution/4_di_no_classes/test_order_service.py_
 ```sh
-pytest solution/4_di_no_classes/tests.py
+python -m pip install flask
+pytest solution/4_di_no_classes/test_order_service.py
 ```
 
 ## 0. Separated to functions
@@ -64,3 +65,6 @@ No need to use base classes as Python supports duck typing. Makes code more unde
 
 ## 4. DI without classes
 Example how to use DI without classes. Understandability is reduced, but it is possible to use DI without classes.
+
+## TODO: 5. DI with classes and base classes
+Use base classes.

@@ -9,7 +9,7 @@ from s3_client import S3Client
 app = Flask(__name__)
 
 
-add_shipping_to_order = create_order_service(
+add_shipping_to_order, get_shipping_label = create_order_service(
     OrderStore(),
     lambda x: DHLClient().create_shipment_request(x),
     lambda x: S3Client().store_label(x))

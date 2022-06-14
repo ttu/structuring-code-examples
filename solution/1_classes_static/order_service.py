@@ -23,3 +23,15 @@ def add_shipping_to_order(order_id: str) -> tuple[bool, str]:
 
     order_store.update_order_shipping_label(order_id, shipping_id, label_url)
     return (True, "")
+
+
+# NOTE: Not in use, but kept as an example
+def get_order_shipping_label(self, order_id: str):
+    order = self.order_store.get_order(order_id)
+
+    if not order:
+        return (False, "Order not found")
+    if not order.shipping_label:
+        return (False, "Order has no shipping label")
+
+    return (True, order.shipping_label)

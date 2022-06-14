@@ -20,4 +20,15 @@ def create_order_service(order_store, create_shipment_request, store_label):
         order_store.update_order_shipping_label(order_id, shipping_id, label_url)
         return (True, "")
 
-    return add_shipping_to_order
+    # NOTE: Not in use, but kept as an example
+    def get_order_shipping_label(order_id: str):
+        order = order_store.get_order(order_id)
+
+        if not order:
+            return (False, "Order not found")
+        if not order.shipping_label:
+            return (False, "Order has no shipping label")
+
+        return (True, order.shipping_label)
+
+    return add_shipping_to_order, get_order_shipping_label

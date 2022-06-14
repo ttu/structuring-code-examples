@@ -1,11 +1,10 @@
-import re
 from order_service import create_order_service
 from mocks import MockOrderStore, mock_create_shipment_request, mock_store_label
 
 
 def test_add_shipping_to_order_success():
     orderId = "123"
-    add_shipping_to_order = create_order_service(MockOrderStore(), mock_create_shipment_request, mock_store_label)
+    add_shipping_to_order, _ = create_order_service(MockOrderStore(), mock_create_shipment_request, mock_store_label)
 
     result = add_shipping_to_order(orderId)
     assert result[0] is True, "Expected True, got %s" % result[0]
@@ -13,7 +12,7 @@ def test_add_shipping_to_order_success():
 
 def test_add_shipping_to_order_label_fail():
     orderId = "123"
-    add_shipping_to_order = create_order_service(
+    add_shipping_to_order, _ = create_order_service(
         MockOrderStore(), mock_create_shipment_request, lambda x: (False, "S3 failed"))
 
     result = add_shipping_to_order(orderId)

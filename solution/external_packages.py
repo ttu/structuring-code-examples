@@ -67,6 +67,7 @@ class Query:
 
 class Order:
     objects = Query()
+    order_id = ''
     shipping_id = ''
     label_url = ''
     customer = None

@@ -56,22 +56,33 @@ pytest solution/4_di_no_classes/test_order_service.py
 
 NOTE: To execute tests with VS Code, open each solution directory separately in VS Code.
 
+Each solution has the separation implemented in a different way, but each solution has separation to 3 "layers".
+
+1. Entrypoint (API / Command)
+2. Business logic
+3. DB/API connection
+
 ## 0. Separated to functions
-For readability, move functionality to separate functions.
+* For readability, move functionality to separate functions
+* We can test functionality with patching (fails as the module has reference to Flask)
 
 ## 1. Separated to classes and modules
-For readability, move functions to separate classes and modules. Classes are stateless (static), so from functional perspective they are just modules.
+* For readability, move functions to separate classes and modules
+  * Classes are stateless (static), so from the functional perspective classes are just modules
+* Testing with patching
 
 ## 2. Separated to classes
-Move functionality to classes. Service has high coupling, as it creates all instances, so not real benefit over previous solution.
+* Move functionality to classes
+* Service has high coupling, as it creates all instances, so not real benefit over previous solution.
+* Testign with patching.
 
 ## 3. Classes with Dependency injection
-Inject dependencies into service.
-
-No need to use base classes as Python supports duck typing. Makes code more understandable, if we use base classes and reduces errors.
+* Inject dependencies into service.
+* No need to use base classes as Python supports duck typing. Makes code more understandable, if we use base classes and reduces errors.
 
 ## 4. DI without classes
-Example how to use DI without classes. Understandability is reduced, but it is possible to use DI without classes.
+* Example how to use DI without classes.
+* Understandability is reduced, but it is possible to use DI without classes.
 
 ## TODO: 5. DI with classes and base classes
 Use base classes.

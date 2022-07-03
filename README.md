@@ -36,6 +36,7 @@ curl -X POST 127.0.0.1:5000/orders/123/shipping
 2. Separated to classes
 3. Classes with Dependency injection
 4. DI without classes
+5. Classes and base classes
 
 Run solutions, e.g. _solution/0_functions_/api.py
 ```sh
@@ -84,5 +85,5 @@ Each solution has the separation implemented in a different way, but each soluti
 * Example how to use DI without classes.
 * Understandability is reduced, but it is possible to use DI without classes.
 
-## TODO: 5. DI with classes and base classes
-Use base classes.
+## 5. DI with classes and base classes
+* Example of using base class with OrderStore

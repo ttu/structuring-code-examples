@@ -26,9 +26,9 @@ def create_order_service(order_store, create_shipment_request, store_label):
 
         if not order:
             return (False, "Order not found")
-        if not order.shipping_label:
+        if not order.label_url:
             return (False, "Order has no shipping label")
 
-        return (True, order.shipping_label)
+        return (True, order.label_url)
 
     return add_shipping_to_order, get_order_shipping_label

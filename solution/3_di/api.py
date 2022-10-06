@@ -1,5 +1,3 @@
-import abc
-from dataclasses import dataclass
 from flask import Flask
 
 from order_service import OrderService

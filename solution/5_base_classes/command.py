@@ -1,5 +1,5 @@
 from order_service import OrderService
-from order_store import ApiOrderStore, OrderStore
+from order_store import ApiOrderStore  # OrderStore
 from dhl_client import DHLClient
 from s3_client import S3Client
 

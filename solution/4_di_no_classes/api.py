@@ -19,7 +19,7 @@ add_shipping_to_order, get_shipping_label = create_order_service(
 def add_shipping(order_id: str):
     result = add_shipping_to_order(order_id)
 
-    if (result[0]):
+    if result[0]:
         return ("OK", 200)
 
     if result[1] == "Order":

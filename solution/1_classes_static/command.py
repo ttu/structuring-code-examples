@@ -7,5 +7,5 @@ def add_shipping(order_id: str):
 
 
 if __name__ == "__main__":
-    order_id = "123"
-    add_shipping(order_id)
+    order_id_input = "123"
+    add_shipping(order_id_input)

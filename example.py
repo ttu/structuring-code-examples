@@ -1,6 +1,7 @@
-from flask import Flask
 import base64
 import json
+
+from flask import Flask
 
 from packages import Order, requests
 
@@ -40,7 +41,7 @@ def add_shipping(order_id: str):
         )
 
         dhl_response = requests.post(
-            f"https://wsbexpress.dhl.com/rest/gbl/shipment",
+            "https://wsbexpress.dhl.com/rest/gbl/shipment",
             data=request_json,
             auth=requests.auth.HTTPBasicAuth(username, password),
             headers={"Content-Type": "application/json", "Accept": "application/json"},

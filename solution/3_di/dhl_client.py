@@ -14,7 +14,7 @@ class DHLClient(object):
         payload = json.dumps(self._parse_shipping_info(order))
 
         dhl_response = requests.post(
-            f"https://wsbexpress.dhl.com/rest/gbl/shipment",
+            "https://wsbexpress.dhl.com/rest/gbl/shipment",
             data=payload,
             auth=requests.auth.HTTPBasicAuth(DHL_USERNAME, DHL_PASSWORD),
             headers={"Content-Type": "application/json", "Accept": "application/json"},

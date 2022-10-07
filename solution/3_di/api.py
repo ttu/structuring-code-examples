@@ -16,7 +16,7 @@ app = Flask(__name__)
 def add_shipping(order_id: str):
     result = order_service.add_shipping_to_order(order_id)
 
-    if (result[0]):
+    if result[0]:
         return ("OK", 200)
 
     if result[1] == "Order":

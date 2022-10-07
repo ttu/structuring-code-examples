@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+# pylint: disable=unused-argument
+
 
 @dataclass
 class MockOrder:

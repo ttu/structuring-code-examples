@@ -14,7 +14,7 @@ class DHLClient(object):
         payload = json.dumps(DHLClient._parse_shipping_info(order))
 
         dhl_response = requests.post(
-            f"https://wsbexpress.dhl.com/rest/gbl/shipment",
+            "https://wsbexpress.dhl.com/rest/gbl/shipment",
             data=payload,
             auth=requests.auth.HTTPBasicAuth(DHL_USERNAME, DHL_PASSWORD),
             headers={"Content-Type": "application/json", "Accept": "application/json"},
@@ -29,6 +29,7 @@ class DHLClient(object):
         encoded_label = base64.decodebytes(base64_pdf.encode("ascii"))
         return (True, (response_json["ShipmentResponse"]["ShippingId"], encoded_label))
 
+    @staticmethod
     def _parse_shipping_info(order):
         return {
             "recipent": {

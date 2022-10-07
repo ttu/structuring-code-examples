@@ -2,6 +2,8 @@
 from dataclasses import dataclass
 import json
 
+# pylint: disable=unused-argument
+
 
 class HttpAuth:
     def HTTPBasicAuth(self, *args):
@@ -29,6 +31,7 @@ class Response:
 class requests:
     auth = HttpAuth()
 
+    @staticmethod
     def post(url, data, auth, headers):
         return Response(url)
 
@@ -62,7 +65,7 @@ class QueryResponse:
 
 class Query:
     def __init__(self):
-        self.filter = lambda order_id: QueryResponse(order_id)
+        self.filter = lambda order_id: QueryResponse(order_id)  # pylint: disable=unnecessary-lambda
 
 
 class Order:

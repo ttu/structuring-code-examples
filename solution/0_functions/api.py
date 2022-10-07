@@ -2,6 +2,7 @@
 import base64
 import json
 from typing import Optional
+
 from flask import Flask
 
 from packages import Order, requests
@@ -43,7 +44,7 @@ def create_shipment_request(order: Order):
     payload = json.dumps(parse_shipping_info(order))
 
     dhl_response = requests.post(
-        f"https://wsbexpress.dhl.com/rest/gbl/shipment",
+        "https://wsbexpress.dhl.com/rest/gbl/shipment",
         data=payload,
         auth=requests.auth.HTTPBasicAuth(DHL_USERNAME, DHL_PASSWORD),
         headers={"Content-Type": "application/json", "Accept": "application/json"},

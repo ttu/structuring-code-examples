@@ -7,7 +7,7 @@ def test_add_shipping_to_order_success():
     order_service = OrderService(MockOrderStore(), MockDHLClient(), MockS3Client())
 
     result = order_service.add_shipping_to_order(orderId)
-    assert result[0] is True, "Expected True, got %s" % result[0]
+    assert result[0] is True, f"Expected True, got {result[0]}"
 
 
 def test_add_shipping_to_order_label_fail():
@@ -15,5 +15,5 @@ def test_add_shipping_to_order_label_fail():
     order_service = OrderService(MockOrderStore(), MockDHLClient(), MockS3Client(False))
 
     result = order_service.add_shipping_to_order(orderId)
-    assert result[0] is False, "Expected False, got %s" % result[0]
-    assert result[1] == "Label", "Expected Label, got %s" % result[1]
+    assert result[0] is False, f"Expected False, got {result[0]}"
+    assert result[1] == "Label", f"Expected Label, got {result[1]}"

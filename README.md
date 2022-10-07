@@ -20,7 +20,7 @@ Install prerequisites
 ```sh
 python -m venv .venv
 source .venv/bin/activate
-python -m pip install flask
+python -m pip install -e .
 ```
 
 Execute example
@@ -51,7 +51,6 @@ python solution/4_di_no_classes/command.py
 
 Run tests, e.g. _solution/4_di_no_classes/test_order_service.py_
 ```sh
-python -m pip install pytest
 pytest solution/4_di_no_classes/test_order_service.py
 ```
 

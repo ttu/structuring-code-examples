@@ -11,6 +11,7 @@ class MockOrder:
 
 
 class MockOrderStore:
+
     def __init__(self):
         self.order = MockOrder("", "", "")
 
@@ -24,12 +25,14 @@ class MockOrderStore:
         return True
 
 
-class MockDHLClient(object):
+class MockDHLClient:
+
     def create_shipment_request(self, order):
         return True, ("1", bytes())
 
 
-class MockS3Client(object):
+class MockS3Client:
+
     def __init__(self, success=True):
         self.success = success
 

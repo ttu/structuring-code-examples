@@ -3,7 +3,7 @@ from dhl_client import DHLClient
 from s3_client import S3Client
 
 
-class OrderService(object):
+class OrderService:
 
     def __init__(self):
         self.order_store = OrderStore()

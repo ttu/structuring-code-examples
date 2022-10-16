@@ -7,7 +7,7 @@ DHL_USERNAME = ""
 DHL_PASSWORD = ""
 
 
-class DHLClient(object):
+class DHLClient:
 
     @staticmethod
     def create_shipment_request(order: Order):

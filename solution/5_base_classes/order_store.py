@@ -15,6 +15,7 @@ class StoreBase(ABC):
 
 
 class OrderStore(StoreBase):
+
     def get_order(self, order_id: str) -> Order:
         return Order.objects.filter(order_id=order_id).first()
 
@@ -29,6 +30,7 @@ class OrderStore(StoreBase):
 # Replace OrdereStore with ApiOrderStore from command.py
 # TypeError: Can't instantiate abstract class ApiOrderStore with abstract method update_order_shipping_label
 class ApiOrderStore(StoreBase):
+
     def get_order(self, order_id: str) -> Order:
         # We would fetch the order from the API in here
         # order = request.get(f"/api/orders/{order_id}")

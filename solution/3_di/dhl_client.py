@@ -8,7 +8,7 @@ DHL_USERNAME = ""
 DHL_PASSWORD = ""
 
 
-class DHLClient(object):
+class DHLClient:
 
     def create_shipment_request(self, order):
         payload = json.dumps(self._parse_shipping_info(order))

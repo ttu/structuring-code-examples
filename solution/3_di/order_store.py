@@ -1,7 +1,7 @@
 from packages import Order
 
 
-class OrderStore(object):
+class OrderStore:
 
     def get_order(self, order_id: str):
         return Order.objects.filter(order_id=order_id).first()
@@ -17,7 +17,7 @@ class OrderStore(object):
 # Use this class to show problems of not using base classes, e.g. forget to add required method
 # Replace OrdereStore with ApiOrderStore from command.py
 # AttributeError: 'ApiOrderStore' object has no attribute 'update_order_shipping_label'
-class ApiOrderStore(object):
+class ApiOrderStore:
 
     def get_order(self, order_id: str):
         # We would fetch the order from the API in here

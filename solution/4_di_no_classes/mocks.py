@@ -11,6 +11,7 @@ class MockOrder:
 
 
 class MockOrderStore:
+
     def __init__(self):
         self.order = MockOrder("", "", "")
 

@@ -2,7 +2,7 @@ from typing import Optional
 from packages import Order
 
 
-class OrderStore(object):
+class OrderStore:
 
     def get_order(self, order_id: str) -> Optional[Order]:
         return Order.objects.filter(order_id=order_id).first()

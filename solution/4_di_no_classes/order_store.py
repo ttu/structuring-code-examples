@@ -1,7 +1,7 @@
 from packages import Order
 
 
-class OrderStore(object):
+class OrderStore:
 
     def get_order(self, order_id: str):
         return Order.objects.filter(order_id=order_id).first()

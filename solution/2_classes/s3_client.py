@@ -6,7 +6,8 @@ S3_PASSWORD = ""
 S3_STORAGE_BUCKET = ""
 
 
-class S3Client(object):
+class S3Client:
+
     def store_label(self, encoded_label: bytes):
         s3_response = requests.post(
             f"https://dev.aws.com/s3/{S3_STORAGE_BUCKET}",

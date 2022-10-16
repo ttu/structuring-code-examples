@@ -4,7 +4,7 @@ from dhl_client import DHLClient
 from s3_client import S3Client
 
 
-add_shipping_to_order = create_order_service(
+add_shipping_to_order, _ = create_order_service(
     OrderStore(),
     lambda x: DHLClient().create_shipment_request(x),
     lambda x: S3Client().store_label(x))

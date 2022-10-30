@@ -17,6 +17,7 @@ class OrderStore:
 # Use this class to show problems of not using base classes, e.g. forget to add required method
 # Replace OrdereStore with ApiOrderStore from command.py
 # AttributeError: 'ApiOrderStore' object has no attribute 'update_order_shipping_label'
+# Raised when method is executed: self.order_store.update_order_shipping_label(order_id, shipping_id, label_url)
 class ApiOrderStore:
 
     def get_order(self, order_id: str):

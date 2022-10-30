@@ -29,6 +29,7 @@ class OrderStore(StoreBase):
 
 # Replace OrdereStore with ApiOrderStore from command.py
 # TypeError: Can't instantiate abstract class ApiOrderStore with abstract method update_order_shipping_label
+# Raised when object is instantiated: order_service = OrderService(ApiOrderStore(), DHLClient(), S3Client())
 class ApiOrderStore(StoreBase):
 
     def get_order(self, order_id: str) -> Order:
